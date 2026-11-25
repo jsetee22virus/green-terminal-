@@ -1,1 +1,76 @@
-
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#020403">
+<title>UNKNOWN SIGNAL</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#020403;color:#00ff70;font-family:Consolas,Monaco,monospace;overflow-x:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;opacity:.62}
+body:after{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 3px,#0005 4px 5px);mix-blend-mode:multiply}
+main{position:relative;z-index:1;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:34px 16px;text-align:center}
+.kicker{font-size:.72rem;letter-spacing:.35em;color:#9affbd;margin-bottom:12px}
+h1{font-size:clamp(2rem,9vw,5rem);letter-spacing:.1em;line-height:1;margin:0;color:#d9ffe5;text-shadow:0 0 7px #00ff70,0 0 24px #00ff70;animation:flicker 5s infinite}
+h1 span{color:#ff304b;text-shadow:0 0 9px #ff001e,0 0 25px #ff001e}
+.mask-wrap{width:min(220px,54vw);margin:24px auto 14px;filter:drop-shadow(0 0 12px #00ff70) drop-shadow(0 0 28px #ff001e55);animation:float 4s ease-in-out infinite}
+.mask{width:100%;height:auto}
+.symbol{font-size:1.5rem;color:#ff304b;letter-spacing:.45em;text-shadow:0 0 12px #ff001e;margin:4px 0 18px}
+.status{font-size:.78rem;letter-spacing:.18em;color:#a5ffc1}
+.terminal{width:min(650px,94vw);margin:24px auto 0;padding:18px 20px;border:1px solid #00c85b;background:#001309e8;box-shadow:0 0 28px #00ff6633, inset 0 0 22px #00ff6610;text-align:left;line-height:1.8;font-size:clamp(.72rem,2.5vw,.9rem)}
+.line{white-space:normal;overflow-wrap:anywhere}
+.red{color:#ff5368;text-shadow:0 0 8px #ff001e}
+.dim{color:#55a879}
+.cursor{display:inline-block;width:9px;height:1em;background:#00ff70;vertical-align:middle;animation:blink .7s steps(2) infinite}
+.warning{margin-top:18px;color:#ff6478;font-size:.68rem;letter-spacing:.14em;animation:pulse 2.5s infinite}
+@keyframes blink{50%{opacity:0}}
+@keyframes float{50%{transform:translateY(-8px)}}
+@keyframes pulse{50%{opacity:.45}}
+@keyframes flicker{0%,94%,96%,98%,100%{opacity:1}95%,97%{opacity:.55}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<main>
+  <div class="kicker">CONEXÃO DESCONHECIDA · CANAL 06</div>
+  <h1>UNKNOWN <span>SIGNAL</span></h1>
+  <div class="mask-wrap" aria-label="Máscara demoníaca estilizada">
+    <svg class="mask" viewBox="0 0 240 250" role="img" aria-hidden="true">
+      <defs>
+        <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#d7ffe5"/><stop offset=".48" stop-color="#477f60"/><stop offset="1" stop-color="#06170d"/>
+        </linearGradient>
+      </defs>
+      <path d="M48 78 L12 12 L83 48 Q120 27 157 48 L228 12 L192 78 Q207 111 190 171 Q173 221 120 241 Q67 221 50 171 Q33 111 48 78Z" fill="#020805" stroke="#00ff70" stroke-width="4"/>
+      <path d="M48 80 L23 26 L86 59 Q120 43 154 59 L217 26 L192 80 Q198 131 178 174 Q158 211 120 226 Q82 211 62 174 Q42 131 48 80Z" fill="url(#metal)" opacity=".85"/>
+      <path d="M54 112 L106 124 L79 143Z" fill="#050907" stroke="#ff304b" stroke-width="3"/>
+      <path d="M186 112 L134 124 L161 143Z" fill="#050907" stroke="#ff304b" stroke-width="3"/>
+      <path d="M120 111 L105 166 L120 181 L135 166Z" fill="#07110b" stroke="#00ff70" stroke-width="3"/>
+      <path d="M83 183 Q120 202 157 183 L145 211 L120 222 L95 211Z" fill="#030705" stroke="#00ff70" stroke-width="3"/>
+      <path d="M100 188 L108 205 M120 192 L120 214 M140 188 L132 205" stroke="#ff304b" stroke-width="3"/>
+      <path d="M49 79 L75 91 M191 79 L165 91" stroke="#d7ffe5" stroke-width="3" opacity=".7"/>
+    </svg>
+  </div>
+  <div class="symbol">⛧ &nbsp; 𖤐 &nbsp; ⛧</div>
+  <div class="status">SISTEMA ATIVO · ORIGEM NÃO IDENTIFICADA</div>
+  <section class="terminal">
+    <div class="line">[ <span class="dim">OK</span> ] Inicializando canal...</div>
+    <div class="line">[ <span class="dim">OK</span> ] Sinal encontrado</div>
+    <div class="line">[ <span class="red">ALERTA</span> ] Uma presença desconhecida está observando</div>
+    <div class="line">[ <span class="red">ERRO</span> ] Origem do sinal: <span class="red">DESCONHECIDA</span></div>
+    <div class="line">user@unknown:~$ <span class="cursor"></span></div>
+  </section>
+  <div class="warning">NÃO HÁ NENHUMA CONEXÃO REAL · SIMULAÇÃO VISUAL</div>
+</main>
+<script>
+const c=document.getElementById('matrix'),ctx=c.getContext('2d');
+const chars='アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&';
+const font=16;let drops=[];
+function resize(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);drops=Array(Math.ceil(innerWidth/font)).fill(1)}
+function draw(){ctx.fillStyle='rgba(2,4,3,.105)';ctx.fillRect(0,0,innerWidth,innerHeight);ctx.font=font+'px monospace';for(let i=0;i<drops.length;i++){ctx.fillStyle=Math.random()>.985?'#ff304b':'#00ff70';ctx.fillText(chars[Math.floor(Math.random()*chars.length)],i*font,drops[i]*font);if(drops[i]*font>innerHeight&&Math.random()>.975)drops[i]=0;drops[i]++}requestAnimationFrame(draw)}
+addEventListener('resize',resize);resize();draw();
+</script>
+</body>
+</html>
