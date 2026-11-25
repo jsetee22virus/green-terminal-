@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#020403">
-<title>UNKNOWN SIGNAL</title>
+<title>AGUARDE... TRANSFERINDO DADOS BANCÁRIOS.</title>
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%;background:#020403;color:#00ff70;font-family:Consolas,Monaco,monospace;overflow-x:hidden}
@@ -24,23 +24,6 @@ h1 span{color:#ff304b;text-shadow:0 0 9px #ff001e,0 0 25px #ff001e}
 .dim{color:#55a879}
 .cursor{display:inline-block;width:9px;height:1em;background:#00ff70;vertical-align:middle;animation:blink .7s steps(2) infinite}
 .warning{margin-top:18px;color:#ff6478;font-size:.68rem;letter-spacing:.14em;animation:pulse 2.5s infinite}
-.transfer{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:95vw;
-font-size:clamp(1.1rem,5vw,2rem);
-font-weight:bold;
-color:#fff;
-text-shadow:0 0 10px #fff,0 0 22px #00ff70;
-z-index:5;
-animation:transferBlink 1s steps(2,start) infinite;
-pointer-events:none;
-}
-@keyframes transferBlink{
-50%{opacity:.2}
-}
 @keyframes blink{50%{opacity:0}}
 @keyframes float{50%{transform:translateY(-8px)}}
 @keyframes pulse{50%{opacity:.45}}
